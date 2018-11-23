@@ -9,6 +9,8 @@ import scrapy
 
 
 class GucItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    link=scrapy.Field()
+    image=scrapy.Field()
+    uuid=scrapy.Field()
+    name=scrapy.Field()
+    price=scrapy.Field()
