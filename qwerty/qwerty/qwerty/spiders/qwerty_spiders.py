@@ -1,5 +1,5 @@
 import scrapy
-from qwerty.items   import QwertyItem
+from lavie.items   import QwertyItem
 
 
 

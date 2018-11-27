@@ -11,15 +11,11 @@ class GucciSpider(scrapy.Spider):#class  GucciSpider is made which extract on th
 
 
         def parse(self,response):#parse the website
-            for kapada in response.xpath("//div[contains(@class,'product-tiles-grid')]"):# agar ye h response m too
-                if kapada.xpath("./article[contains(@class,'product-tiles-grid-item product-tiles-grid-item-medium product-tiles-grid-item-small hover-link border-right')]").extract():#agar y bhi h too extract all
-                    count+=1
-
-                    cloth= GucItem()#making a object in GucItem class where all the response is collected in form of items and these are defined as Field
-                    cloth['link']=kapada.xpath("./a[contains(@class,'product-tiles-grid-item-link')]/@href").extract()
-                    cloth['image']=kapada.xpath("./div(@class,'product-tiles-grid-item-image-wrapper')/div(@class,'product-tiles-grid-item-image ')/img/@src").extract()
-                    cloth['uuid']=kapada.xpath("./a/@data-style-id").extract_first()
-                    cloth['name']=kapada.xpath("./div[(@class,'product-tiles-grid-item-detail')]/div[(@class,'product-tiles-grid-item-info')]/h2/text()").extract()
-                    cloth['price']=kapada.xpath("./div[(@class,'product-tiles-grid-item-detail')]/div[(@class,'product-tiles-grid-item-info')]/p/span(@class,'sale')/text()").extract()
-                    yield cloth
-                    yield  scrapy.Request(url=cloth['link'],method=GET,callback=self.parse)
+            for kapada in response.xpath("./article[@class='product-tiles-grid-item ']"):# agar ye h response m too
+                cloth= GucItem()#making a object in GucItem class where all the response is collected in form of items and these are defined as Field
+                cloth['link']=kapada.xpath("./a[@class='product-tiles-grid-item-link']/@href").extract()
+                cloth['image']=kapada.xpath("./div[@class='product-tiles-grid-item-image-wrapper']/div[@class='product-tiles-grid-item-image ']/img/@src").extract()
+                cloth['uuid']=kapada.xpath("./a/@data-style-id").extract()
+                cloth['name']=kapada.xpath("./div[@class='product-tiles-grid-item-detail']/div[@class='product-tiles-grid-item-info']/h2/text()").extract()
+                cloth['price']=kapada.xpath("./div[@class='product-tiles-grid-item-detail']/div[@class='product-tiles-grid-item-info']/p/span[@class='sale']/text()").extract()
+                yield cloth
