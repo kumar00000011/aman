@@ -1,5 +1,5 @@
 import scrapy
-from lavie.items   import QwertyItem
+from qwerty.items   import QwertyItem
 
 
 
@@ -12,16 +12,21 @@ class QwertSpider(scrapy.Spider):
 
         def parse(self,response):
             for items in  response.xpath("//article[contains(@class,'product-tiles-grid-item ')]"):
-                      cloth=QwertyItem()
-                      cloth['name']=items.xpath("./a/div[@class='product-tiles-grid-item-detail']/div[@class='product-tiles-grid-item-info']/h2/text()").extract()
-                      cloth['price']=items.xpath(" ./a/div[@class='product-tiles-grid-item-detail']/div[@class='product-tiles-grid-item-info']/p/span[@class='sale']/text()").extract()
-                      cloth['uuid']=items.xpath("./a/@data-style-id").extract()
-                      cloth['crawled_from']=response.url
-                      cloth['link']=items.xpath("./a/@href").extract()
-                      cloth['brand']="Gucci"
-                      cloth['image']=items.xpath("./a/div[@class='product-tiles-grid-item-image-wrapper']/div[@class='product-tiles-grid-item-image ']/img/@src").extract()
-                      yield cloth
+                            cloth=QwertyItem()
+                            cloth['name']=items.xpath("./a/div[@class='product-tiles-grid-item-detail']/div[@class='product-tiles-grid-item-info']/h2/text()").extract()
+                            cloth['price']=items.xpath(" ./a/div[@class='product-tiles-grid-item-detail']/div[@class='product-tiles-grid-item-info']/p/span[@class='sale']/text()").extract()
+                            cloth['uuid']=items.xpath("./a/@data-style-id").extract()
+                            cloth['crawled_from']=response.url
+                            cloth['link']=items.xpath("./a/@href").extract()
+                            cloth['brand']="Gucci"
+                            cloth['image']=items.xpath("./a/div[@class='product-tiles-grid-item-image-wrapper']/div[@class='product-tiles-grid-item-image ']/img/@src").extract()
+                            yield cloth
+
 
             for kapada in response.xpath("//li [@class='filter-expander filter-dropdown filter-category-expander']/div[@class='filter-menu']"):
-                      yield{
-                            'category':kapada.xpath("./ul/li/a/@href").extract()}
+
+
+
+                category=kapada.xpath("./ul/li/a/@href").extract()
+
+                print(category)

@@ -16,3 +16,4 @@ class QwertyItem(scrapy.Item):
     price=scrapy.Field()
     brand=scrapy.Field()
     image=scrapy.Field()
+    category=scrapy.Field()

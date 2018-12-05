@@ -8,10 +8,9 @@
 import scrapy
 
 
-class bagItem(scrapy.Item):
-    name=scrapy.Field()
-    link=scrapy.Field()
-    crawled_from=scrapy.Field()
-    price=scrapy.Field()
+class CuyanaItem(scrapy.Item):
     brand=scrapy.Field()
-    image=scrapy.Field()
+    title=scrapy.Field()
+    link=scrapy.Field()
+    sub_category_link=scrapy.Field()
+    sub_category_title=scrapy.Field()
